@@ -23,6 +23,10 @@ fun foo(x: Option<String>) {
 
 fun main() {
     println(App().greeting)
+    /* Doesn't work:
+    foo(None) // Classifier 'None' does not have a companion object, and thus must be initialized here
+    foo(None()) // unresolved reference: None
+    */
     @Suppress("UNCHECKED_CAST")
     foo(scala.`None$`.`MODULE$` as Option<String>)
     foo(NoneFun<String>())
