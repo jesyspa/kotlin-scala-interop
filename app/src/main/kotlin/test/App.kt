@@ -6,6 +6,10 @@ package test
 import scala.None
 import scala.Option
 
+// Thanks to Gabriele for suggesting this approach
+@Suppress("UNCHECKED_CAST")
+fun<T> NoneFun() = Option.apply(null) as Option<T>
+
 class App {
     val greeting: String
         get() {
@@ -13,10 +17,13 @@ class App {
         }
 }
 
-fun foo(x: Option<String>) {}
+fun foo(x: Option<String>) {
+    println(x.toString())
+}
 
 fun main() {
     println(App().greeting)
-    foo(None)
-    foo(None())
+    @Suppress("UNCHECKED_CAST")
+    foo(scala.`None$`.`MODULE$` as Option<String>)
+    foo(NoneFun<String>())
 }
